@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Registration {% endblock %}
+{% block head %}
+<style>
+  .page-heading {
+    background-image: url("{% static 'img/heading-bg.jpg' %}");
+  }
+  .create-nft {
+    background-image: url("{% static 'img/main-bg.jpg' %}");
+  }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-heading normal-space">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h6>Liberty NFT Market</h6>
+          <h2>Registration on market</h2>
+          <span>Home > <a href="{% url 'market:home' %}">Home</a></span>
+          <div class="buttons">
+            <div class="main-button">
+              <a href="{% url 'market:explore' %}">Explore Our Items</a>
+            </div>
+            {% if request.user.is_authenticated %}
+            <div class="border-button">
+              <a href="{% url 'market:create' %}">Create Your NFT</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="item-details-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <div class="line-dec"></div>
+            <h2>Apply For <em>Your Item</em> Here.</h2>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <form id="contact" action="{% url 'author:register' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

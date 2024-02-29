@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Login {% endblock %}
+{% block head %}
+<style>
+  .page-heading {
+    background-image: url("{% static 'img/heading-bg.jpg' %}");
+  }
+  .create-nft {
+    background-image: url("{% static 'img/main-bg.jpg' %}");
+  }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-heading normal-space">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h6>Liberty NFT Market</h6>
+          <h2>Login on Market</h2>
+          <span>Home > <a href="{% url 'market:home' %}">Home</a></span>
+          <div class="buttons">
+            <div class="main-button">
+              <a href="{% url 'market:explore' %}">Explore Our Items</a>
+            </div>
+            {% if request.user.is_authenticated %}
+            <div class="border-button">
+              <a href="{% url 'market:create' %}">Create Your NFT</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <center>
+    <div class="conteiner">
+        <form action="{% url 'author:login' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+  </center>
+
+{% endblock %}

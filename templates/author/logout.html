@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Logout {% endblock %}
+{% block head %}
+<style>
+  .page-heading {
+    background-image: url("{% static 'img/heading-bg.jpg' %}");
+  }
+  .create-nft {
+    background-image: url("{% static 'img/main-bg.jpg' %}");
+  }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-heading normal-space">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h6>Liberty NFT Market</h6>
+          <h2>You are Log out ?</h2>
+          <span>Home > <a href="{% url 'market:home' %}">Home</a></span>
+          <div class="buttons">
+            <div class="main-button">
+              <a href="{% url 'market:explore' %}">Explore Our Items</a>
+            </div>
+            {% if request.user.is_authenticated %}
+            <div class="border-button">
+              <a href="{% url 'market:create' %}">Create Your NFT</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <center>
+    <div class="container-fluid mg-5 mt-5">
+        <h3>Your are logout ?</h3>
+        <form action="{% url 'author:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Yes</button>
+        </form>
+        <a href="{% url 'market:home' %}"><button>Now</button></a>
+    </div>
+  </center>
+
+{% endblock %}
